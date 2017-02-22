@@ -1,0 +1,26 @@
+<ion-modal-view class="transparent">
+    <ion-header-bar class="nav-bar-block bar-light bar-search">
+        <div class="buttons buttons-left">
+            <span class="left-buttons">
+                <button class="button button-clear" ng-click="closeSearch()">
+                    <img src="img/ic_arrow_back_cream_24dp.svg">
+                </button>
+            </span>
+        </div>
+        <div class="title">
+            <label class="item-input-wrapper">
+                <input type="search" ng-model="filter.query" placeholder="Search by product title and article">
+            </label>
+        </div>
+        <div class="buttons buttons-right">
+            <span class="right-buttons">
+                <button class="button button-clear" ng-click="clearSearch()">
+                    <img src="img/ic_close_cream_24dp.svg">
+                </button>
+            </span>
+        </div>
+    </ion-header-bar>
+    <ion-content class="search">
+
+    </ion-content>
+</ion-modal-view>

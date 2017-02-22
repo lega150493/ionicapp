@@ -1,0 +1,65 @@
+<ion-view view-title="Order list">
+    <div class="bar bar-footer list-order">
+        <button class="button button-full button-calm pdf" ng-show="getItems().length">
+            Get in PDF
+        </button>
+    </div>
+    <ion-content class="catalog list-order">
+        <ion-list show-delete="false" class="list-borderless">
+            <ion-item ng-repeat="item in getItems()">
+                <div class="item-content">
+                <div class="row">
+                    <button class="button button-icon remove ion-close" ng-click="remove(item.id)">
+                    </button>
+                    <div class="col-25">
+                        <img ng-src="{{item.img}}">
+                    </div>
+                    <div class="col-75">
+                        <div class="row">
+                            <div class="col-90">
+                                <span class="article">{{item.article}}</span>
+                                <h3>{{item.title}}</h3>
+                                <p>{{item.description}}</p>
+                            </div>
+                            <div class="col-10 count">
+                            <button class="button button-light" ng-click="minusItem(item.id)" ng-show="item.count > 1">{{item.count - 1}}</button>
+                            <button class="button button-calm">{{item.count}}</button>
+                            <button class="button button-light" ng-click="plusItem(item.id)">{{item.count + 1}}</button>
+                                <!--<div id="slider{{item.id}}" class="swipe">
+                                    <div class="swipe-wrap">
+                                        <div>1</div>
+                                        <div>2</div>
+                                        <div>3</div>
+                                        <div>4</div>
+                                        <div>5</div>
+                                        <div>6</div>
+                                        <div>7</div>
+                                        <div>8</div>
+                                        <div>9</div>
+                                    </div>
+                                </div>-->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="detail">
+                    <div class="row spec">
+                        <div class="col">
+                            <i class="icon calm ion-cube"></i>
+                            {{item.packing}}
+                        </div>
+                        <div class="col">
+                            <i class="icon calm ion-arrow-resize"></i>
+                            {{item.dimensions}}
+                        </div>
+                        <div class="col">
+                            <i class="icon calm ion-android-time"></i>
+                            {{item.time}}
+                        </div>
+                    </div>
+                </div>
+                </div>
+            </ion-item>
+        </ion-list>
+    </ion-content>
+</ion-view>

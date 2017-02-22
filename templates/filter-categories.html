@@ -1,0 +1,29 @@
+<ion-modal-view>
+    <ion-header-bar class="nav-bar-block bar-dark bar-filter">
+        <div class="left-buttons">
+            <button class="button button-clear" ng-click="closeFilterCategories()">
+                <img src="img/ic_arrow_back_cream_24dp.svg">
+            </button>
+        </div>
+        <h1 class="title">Categories</h1>
+    </ion-header-bar>
+    <div class="bar bar-footer filter">
+        <div class="button-bar bar-calm">
+            <a class="button" ng-click="closeFilterCategories()">Cancel</a>
+            <a class="button" ng-click="closeFilterCategories()">Apply</a>
+        </div>
+    </div>
+    <ion-content class="filter-categories">
+        <div class="list">
+            <div class="item item-checkbox item-button-left" ng-repeat="item in categories">
+                <button class="button button-clear" ng-show="item.categories.length">
+                    <img src="img/ic_chevron_right_cream_24dp.svg">
+                </button>
+                <h2>{{item.title}}</h2>
+                <label class="checkbox" ng-class="{'checkbox-calm': filterHasCategory(item.id), 'checkbox-stable': !filterHasCategory(item.id)}">
+                    <input type="checkbox" ng-checked="filterHasCategory(item.id)" ng-click="filterToggleCategory(item.id)">
+                </label>
+            </div>
+        </div>
+    </ion-content>
+</ion-modal-view>

@@ -1,0 +1,135 @@
+<ion-view>
+    <ion-nav-title>
+        <a href="#/app/main"><img src="img/logo.svg"></a>
+    </ion-nav-title>
+    <ion-nav-buttons side="right">
+        <button class="button button-clear search" ng-click="openSearch()">
+            <img src="img/ic_search_cream_24dp.svg">
+        </button>
+        <button class="button button-clear filter" ng-click="openFilter()">Filters</button>
+    </ion-nav-buttons>
+    <button class="button button-dark button-fab button-fab-bottom-right activated" ng-click="go('/app/list')" ng-show="inOrderCount()" class="ng-hide">
+        <img src="img/ic_list_cream_36dp.svg">
+    </button>
+
+    <ion-content class="catalog">
+        <div class="button-bar">
+            <a class="button button-clear button-positive" ng-click="sort('article')" ng-class="{'active' : filter.orderBy === 'article'}">Sort by article</a>
+            <a class="button button-clear button-positive" ng-click="sort('title')" ng-class="{'active' : filter.orderBy === 'title'}">Sort by name</a>
+        </div>
+        <h3 class="search-results padding-horizontal" ng-show="filter.query">Search results for "{{filter.query}}":</h3>
+        <div ng-repeat="cat in getCategories() | filter: categoryFilter track by cat.id" class="item-divider">
+            <h1>{{cat.title}}</h1>
+            <ion-list show-delete="shouldShowDelete"
+                      show-reorder="shouldShowReorder"
+                      can-swipe="listCanSwipe"
+                      class="list-borderless">
+                <ion-item ng-repeat="(id, item) in getItems(cat.items) | filter : itemsFilter | orderBy : filter.orderBy"
+                          ng-class="{expanded: isExpanded(item.id)}">
+                    <div class="row" ng-click="expandItem(item.id, true)">
+                        <div ng-class="{'col-50': isExpanded(item.id), 'col-33': !isExpanded(item.id)}">
+                            <img class="added" src="img/ic_added_green_36dp.svg" ng-show="inOrder(item.id)">
+                            <!--<i class="icon added" ng-show="inOrder(item.id)"></i>-->
+                            <img ng-src="{{item.img}}">
+                        </div>
+                        <div ng-class="{'col-50': isExpanded(item.id), 'col-67': !isExpanded(item.id)}">
+                            <span class="article">{{item.article}}</span>
+                            <h3>{{item.title}}</h3>
+                            <p>{{item.description}}</p>
+                            <p class="packaging" ng-hide="isExpanded(item.id)">
+                                <i class="icon calm ion-cube"></i>
+                                {{item.packaging}}
+                            </p>
+                        </div>
+                    </div>
+                    <div class="detail" ng-show="isExpanded(item.id)">
+                        <dl class="row">
+                            <dt class="col-50">Ingredients:</dt>
+                            <dd class="col-50" ng-bind-html="nl2br(item.ingredients)"></dd>
+                        </dl>
+                        <div class="row spec">
+                            <div class="col">
+                                <i class="icon calm ion-cube"></i>
+                                {{item.packing}}
+                            </div>
+                            <div class="col">
+                                <i class="icon calm ion-arrow-resize"></i>
+                                {{item.dimensions}}
+                            </div>
+                            <div class="col">
+                                <i class="icon calm ion-android-time"></i>
+                                {{item.time}}
+                            </div>
+                        </div>
+                        <div class="button-bar bar-calm">
+                            <a class="button" ng-click="expandItem(item.id, false)">Close description</a>
+                            <a class="button" ng-click="add(item.id)">Add to list</a>
+                        </div>
+                    </div>
+                    <ion-option-button class="button add button-balanced icon-left ion-clipboard" ng-click="add(item.id)" ng-hide="isExpanded(item.id)">
+                        Add to list
+                    </ion-option-button>
+                    <!--<ion-delete-button class="ion-minus-circled" ng-click="items.splice($index, 1)">
+                    </ion-delete-button>
+                    <ion-reorder-button class="ion-navicon" on-reorder="reorderItem(item, $fromIndex, $toIndex)">
+                    </ion-reorder-button>-->
+                </ion-item>
+            </ion-list>
+            <div ng-repeat="subCat in cat.categories track by cat.id"
+                 class="item-divider"
+                 ng-if="(category === null || category == catID) && subCat.items.length">
+                <h2>{{subCat.title}}</h2>
+                <ion-list show-delete="shouldShowDelete"
+                          show-reorder="shouldShowReorder"
+                          can-swipe="listCanSwipe"
+                          class="list-borderless">
+                    <ion-item ng-repeat="item in subCat.items" ng-click="show(item - 1)">
+                        <div class="row">
+                            <div class="col-33">
+                                <img class="added" src="img/ic_added_green_36dp.svg" ng-show="inOrder(item)">
+                                <img ng-src="{{items[item - 1].img}}">
+                            </div>
+                            <div class="col-67">
+                                <span class="article">{{items[item - 1].article}}</span>
+                                <h3>{{items[item - 1].title}}</h3>
+                                <p>{{items[item - 1].description}}</p>
+                                <p class="packaging" ng-if="expandedItem !== item">{{items[item - 1].packaging}}</p>
+                            </div>
+                        </div>
+                        <div class="detail" ng-if="expandedItem === item">
+                            <dl class="row">
+                                <dt class="col-33">Ingredients:</dt>
+                                <dd class="col-67" ng-bind-html="nl2br(items[item - 1].ingredients)"></dd>
+                            </dl>
+                            <div class="row spec">
+                                <div class="col">
+                                    <i class="icon icon-package"></i>
+                                    {{items[item - 1].packing}}
+                                </div>
+                                <div class="col">
+                                    <i class="icon icon-sizes"></i>
+                                    {{items[item - 1].dimensions}}
+                                </div>
+                                <div class="col">
+                                    <i class="icon icon-time"></i>
+                                    {{items[item - 1].time}}
+                                </div>
+                            </div>
+                            <div class="button-bar bar-calm">
+                                <a class="button" ng-click="expandedItem = null">Close description</a>
+                                <a class="button" ng-click="add(item)">add to list</a>
+                            </div>
+                        </div>
+                        <ion-option-button class="button add button-balanced icon-left ion-clipboard" ng-click="add(item)">
+                            Add to list
+                        </ion-option-button>
+                        <!--<ion-delete-button class="ion-minus-circled" ng-click="items.splice($index, 1)">
+                        </ion-delete-button>
+                        <ion-reorder-button class="ion-navicon" on-reorder="reorderItem(item, $fromIndex, $toIndex)">
+                        </ion-reorder-button>-->
+                    </ion-item>
+                </ion-list>
+            </div>
+        </div>
+    </ion-content>
+</ion-view>

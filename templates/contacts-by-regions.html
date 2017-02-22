@@ -1,0 +1,78 @@
+<ion-view>
+    <ion-nav-title>
+        <a href="#/app/main"><img src="img/logo.svg"></a>
+    </ion-nav-title>
+    <ion-content class="contacts">
+        <div class="bg-wrap">
+            <img src="img/bg-contacts.jpg">
+            <tab-slide-box tab="0">
+                <div class="tsb-icons">
+                    <div class="tsb-ic-wrp">
+                        <ion-scroll direction="x" class="tsb-hscroll">
+                            <a href="javascript:;">China</a>
+                            <a href="javascript:;">South-East Asia</a>
+                            <a href="javascript:;">Middle Asia</a>
+                            <a href="javascript:;">North Africa</a>
+                            <a href="javascript:;">Middle East</a>
+                        </ion-scroll>
+                    </div>
+                    <hr>
+                </div>
+                <ion-slide-box show-pager="false" on-slide-changed="slideHasChanged($index)">
+                    <ion-slide class="China">
+                        <div class="list-borderless padding">
+                            <div class="item"><p>Liauchenia Anton</p></div>
+                            <a class="item item-icon-left phone" href="tel:+861561606082" browse-to="tel:+861561606082">
+                                <img src="img/ic_phone_cream_36dp.svg">
+                                <p>+8615601606082</p>
+                            </a>
+                            <a class="item item-icon-left email" href="mailto:roshen.shanghai@outlook.com">
+                                <img src="img/ic_email_cream_36dp.svg">
+                                <p>roshen.shanghai@outlook.com</p>
+                            </a>
+                        </div>
+                    </ion-slide>
+                    <ion-slide class="South-East Asia">
+                        <div class="list-borderless padding">
+                            <div class="item"><p>Kolomiyets Taras</p></div>
+                            <a class="item item-icon-left phone">
+                                <img src="img/ic_phone_cream_36dp.svg">
+                                <p>+380672351512</p>
+                            </a>
+                            <a class="item item-icon-left email" href="mailto:kolomiyets@roshen.com.ua">
+                                <img src="img/ic_email_cream_36dp.svg">
+                                <p>kolomiyets@roshen.com.ua</p>
+                            </a>
+                        </div>
+                    </ion-slide>
+                    <ion-slide class="Middle Asia">
+                        <div class="list-borderless padding">
+                            <div class="item"><p>Kolomiyets Taras</p></div>
+                            <a class="item item-icon-left phone">
+                                <img src="img/ic_phone_cream_36dp.svg">
+                                <p>+380672351512</p>
+                            </a>
+                            <a class="item item-icon-left email" href="mailto:kolomiyets@roshen.com.ua">
+                                <img src="img/ic_email_cream_36dp.svg">
+                                <p>kolomiyets@roshen.com.ua</p>
+                            </a>
+                        </div>
+                    </ion-slide>
+                    <ion-slide class="North Africa">
+                        <div class="list-borderless padding">
+                            <div class="item"><p>Redouane Hemam Arafi</p></div>
+                            <a class="item item-icon-left phone">
+                                <img src="img/ic_phone_cream_36dp.svg">
+                                <p>+38067612-96-12</p>
+                            </a>
+                            <a class="item item-icon-left email" href="mailto:redouane@roshen.com.ua">
+                                <img src="img/ic_email_cream_36dp.svg">
+                                <p>redouane@roshen.com.ua</p>
+                            </a>
+                        </div>
+                    </ion-slide>
+                </ion-slide-box>
+            </tab-slide-box>
+        </div>
+    </ion-content>
+</ion-view>

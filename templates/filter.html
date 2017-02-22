@@ -1,0 +1,52 @@
+<ion-modal-view>
+    <ion-header-bar class="nav-bar-block bar-dark bar-filter">
+        <div class="left-buttons">
+            <button class="button button-clear" ng-click="closeFilter()">
+                <img src="img/ic_arrow_back_cream_24dp.svg">
+            </button>
+        </div>
+        <h1 class="title">Filter</h1>
+        <div class="buttons buttons-right">
+            <span class="right-buttons">
+                <button class="button button-clear" ng-click="clearFilter()">
+                    Clear filter
+                </button>
+            </span>
+        </div>
+    </ion-header-bar>
+    <div class="bar bar-footer filter">
+        <button class="button button-full button-calm" ng-click="closeFilter()">
+            Check Results
+        </button>
+    </div>
+    <ion-content class="filter">
+        <div class="list list-borderless padding-vertical">
+            <div class="item item-checkbox item-button-right categories">
+                <label class="checkbox checkbox-calm">
+                    <input type="checkbox" ng-model="filter.enableCategories">
+                </label>
+                <h5>Product Categories</h5>
+                <p ng-bind="filterGetCategoriesNames()" ng-click="openFilterCategories()"></p>
+                <button class="button button-clear" ng-click="filterResetCategories()">
+                    <img src="img/ic_close_brown_24dp.svg">
+                </button>
+            </div>
+            <div class="item item-checkbox item-button-right">
+                <label class="checkbox checkbox-calm">
+                    <input type="checkbox" ng-model="filter.enableWeight">
+                </label>
+                <h5>Package Weight</h5>
+                <p ng-bind="filterGetWeightNames()"></p>
+                <button class="button button-clear" ng-click="filterResetWeight()">
+                    <img src="img/ic_close_brown_24dp.svg">
+                </button>
+            </div>
+            <div class="item item-checkbox">
+                <label class="checkbox checkbox-calm">
+                    <input type="checkbox" ng-model="filter.excludeAlcohol">
+                </label>
+                <p>Exclude alcohol</p>
+            </div>
+        </div>
+    </ion-content>
+</ion-modal-view>

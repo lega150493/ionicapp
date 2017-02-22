@@ -1,0 +1,36 @@
+<ion-view>
+    <ion-nav-title>
+        <img src="img/logo.svg">
+    </ion-nav-title>
+    <ion-content class="main">
+        <ion-slide-box does-continue="true"
+                       auto-play="false"
+                       show-pager="false"
+                       class="videos list-borderless padding-vertical">
+            <ion-slide ng-repeat="video in videos">
+                <div class="item item-complex padding-horizontal" browse-to="https://www.youtube.com/watch?v={{video.id}}">
+                    <img ng-src="img/content/youtube-thumb.jpg" class="item-image">
+                    <i class="icon-play"></i>
+                    <div class="item-text-wrap">
+                        <h2 class="stable">{{video.title}}</h2>
+                    </div>
+                </div>
+            </ion-slide>
+        </ion-slide-box>
+        <div class="padding-horizontal"><hr></div>
+        <div class="list links list-borderless padding-horizontal">
+            <a href="#/app/catalog/" class="item">
+                Products
+                <img src="img/ic_chevron_right_cream_24dp.svg">
+            </a>
+            <a href="#/app/about/" class="item">
+                About ROSHEN
+                <img src="img/ic_chevron_right_cream_24dp.svg">
+            </a>
+            <a href="#/app/contacts" class="item">
+                Contacts
+                <img src="img/ic_chevron_right_cream_24dp.svg">
+            </a>
+        </div>
+    </ion-content>
+</ion-view>
